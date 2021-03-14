@@ -2,6 +2,7 @@ var CACHE_NAME = '2021-03-06 00:00';
 var urlsToCache = [
   '/tegaki-kanji-search/',
   '/tegaki-kanji-search/index.js',
+  '/tegaki-kanji-search/demo.json',
   '/tegaki-kanji-search/model/model.json',
   '/tegaki-kanji-search/model/group1-shard1of1.bin',
   'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css',

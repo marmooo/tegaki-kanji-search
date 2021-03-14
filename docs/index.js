@@ -6,7 +6,8 @@ loadConfig();function toggleDarkMode(){if(localStorage.getItem('darkMode')==1){l
 let canvasCache=document.createElement('canvas').getContext('2d');function getImageData(drawElement){const inputWidth=inputHeight=28;canvasCache.drawImage(drawElement,0,0,inputWidth,inputHeight);let imageData=canvasCache.getImageData(0,0,inputWidth,inputHeight);let data=imageData.data;for(let i=0;i<data.length;i+=4){data[i]=255-data[i];data[i+1]=255-data[i+1];data[i+2]=255-data[i+2];}
 return imageData;}
 function getAccuracyScores(imageData){const score=tf.tidy(()=>{const channels=1;let input=tf.browser.fromPixels(imageData,channels);input=tf.cast(input,'float32').div(tf.scalar(255));input=input.expandDims();return model.predict(input).dataSync();});return score;}
-function initSignaturePad(){const canvas=document.getElementById('canvas');const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:'black',backgroundColor:'white',throttle:0,});pad.onEnd=function(){predict(this._canvas);}
+function demo(){fetch('/tegaki-kanji-search/demo.json').then(response=>response.json()).then(data=>{pad.fromData(data);});}
+function initSignaturePad(){const canvas=document.getElementById('canvas');const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:'black',backgroundColor:'white',throttle:0,});demo();pad.onEnd=function(){predict(this._canvas);}
 document.getElementById('eraser').onclick=function(){pad.clear();};}
 function predict(){const imageData=getImageData(canvas);const accuracyScores=getAccuracyScores(imageData);const sortedPredict=getSortedPredict(accuracyScores);updateSuggest(sortedPredict)}
 function removeNonKanji(sortedPredict){return sortedPredict.filter(x=>x[0]>230);}
