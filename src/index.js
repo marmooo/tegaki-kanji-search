@@ -78,7 +78,7 @@ function getAccuracyScores(imageData) {
   return score;
 }
 
-function demo() {
+function demo(pad) {
   fetch('/tegaki-kanji-search/demo.json')
   .then(response => response.json())
   .then(data => {
@@ -95,7 +95,7 @@ function initSignaturePad() {
     backgroundColor: 'white',
     throttle: 0,
   });
-  demo();
+  demo(pad);
   pad.onEnd = function() {
     predict(this._canvas);
   }
