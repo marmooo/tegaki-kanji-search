@@ -1,11 +1,11 @@
-var CACHE_NAME = '2021-05-04 10:30';
+var CACHE_NAME = '2021-05-27 08:30';
 var urlsToCache = [
   '/tegaki-kanji-search/',
   '/tegaki-kanji-search/index.js',
   '/tegaki-kanji-search/demo.json',
   '/tegaki-kanji-search/model/model.json',
   '/tegaki-kanji-search/model/group1-shard1of1.bin',
-  'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css',
   'https://cdn.jsdelivr.net/npm/signature_pad@2.3.2/dist/signature_pad.min.js',
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js',
 ];
