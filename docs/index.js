@@ -11,7 +11,7 @@ function getAccuracyScores(imageData){const score=tf.tidy(()=>{const channels=1;
 function demo(pad){fetch('/tegaki-kanji-search/demo.json').then(response=>response.json()).then(data=>{pad.fromData(data);});}
 function initSignaturePad(){const canvas=document.getElementById('canvas');const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:'black',backgroundColor:'white',throttle:0,});demo(pad);pad.onEnd=function(){predict(this._canvas);}
 document.getElementById('eraser').onclick=function(){pad.clear();};}
-function predict(){const imageData=getImageData(canvas);const accuracyScores=getAccuracyScores(imageData);const sortedPredict=getSortedPredict(accuracyScores);updateSuggest(sortedPredict)}
+function predict(canvas){const imageData=getImageData(canvas);const accuracyScores=getAccuracyScores(imageData);const sortedPredict=getSortedPredict(accuracyScores);updateSuggest(sortedPredict)}
 function removeNonKanji(sortedPredict){return sortedPredict.filter(x=>x[0]>230);}
 function getSortedPredict(accuracyScores){let index=new Array(kanji4List.length);kanji4List.forEach((kanji,i)=>{index[i]=[i,accuracyScores[i]];});index.sort((a,b)=>{if(a[1]<b[1])return 1;if(a[1]>b[1])return-1;return 0;});index=removeNonKanji(index);return index;}
 function getLink(kanji){const gradeDir=getGradeDir(kanji);let a;if(gradeDir){a=document.createElement('a');a.href=`/kanji-dict/${gradeDir}/${kanji}/`;a.innerText=kanji;a.className='h4 p-1';}else{a=document.createElement('span');a.innerText=kanji;a.className='h4 p-1';}
@@ -22,4 +22,4 @@ return false;}}
 function updateSuggest(sortedPredict){const level=document.getElementById('level').selectedIndex;const suggest=document.getElementById('suggest');while(suggest.firstChild){suggest.removeChild(suggest.lastChild);}
 let count=0;for(let i=0;i<sortedPredict.length;i++){const kanji=kanji4List[sortedPredict[i][0]];if(isCovered(level,kanji)){const a=getLink(kanji);suggest.appendChild(a);count+=1;}
 if(count>20){break;}}}
-let model;(async()=>{initSignaturePad();model=await tf.loadLayersModel('model/model.json');})();
+let model;(async()=>{initSignaturePad();model=await tf.loadLayersModel('model/model.json');predict(document.getElementById('canvas'));})();

@@ -117,7 +117,7 @@ function initSignaturePad() {
   };
 }
 
-function predict() {
+function predict(canvas) {
   const imageData = getImageData(canvas);
   const accuracyScores = getAccuracyScores(imageData);
   const sortedPredict = getSortedPredict(accuracyScores);
@@ -200,5 +200,6 @@ let model;
 (async() => {
   initSignaturePad();
   model = await tf.loadLayersModel('model/model.json');
+  predict(document.getElementById('canvas'));
 })();
 
