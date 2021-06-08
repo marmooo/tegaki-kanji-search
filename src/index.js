@@ -190,7 +190,7 @@ function updateSuggest(sortedPredict) {
       suggest.appendChild(a);
       count += 1;
     }
-    if (count > 20) {
+    if (count >= 20) {
       break;
     }
   }

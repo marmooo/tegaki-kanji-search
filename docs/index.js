@@ -21,5 +21,5 @@ case level>=1:if(commonList.includes(kanji)){return true;}}
 return false;}}
 function updateSuggest(sortedPredict){const level=document.getElementById('level').selectedIndex;const suggest=document.getElementById('suggest');while(suggest.firstChild){suggest.removeChild(suggest.lastChild);}
 let count=0;for(let i=0;i<sortedPredict.length;i++){const kanji=kanji4List[sortedPredict[i][0]];if(isCovered(level,kanji)){const a=getLink(kanji);suggest.appendChild(a);count+=1;}
-if(count>20){break;}}}
+if(count>=20){break;}}}
 let model;(async()=>{initSignaturePad();model=await tf.loadLayersModel('model/model.json');predict(document.getElementById('canvas'));})();
