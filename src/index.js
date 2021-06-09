@@ -167,9 +167,7 @@ function updateSuggest(sortedPredict) {
 
 const worker = new Worker('worker.js');
 worker.addEventListener('message', function(e) {
-  if (e.data.event == 'result') {
-    updateSuggest(e.data.result);
-  }
+  updateSuggest(e.data.result);
 });
 initSignaturePad();
 

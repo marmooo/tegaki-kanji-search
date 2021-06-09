@@ -19,4 +19,4 @@ return false;}}
 function updateSuggest(sortedPredict){const level=document.getElementById('level').selectedIndex;const suggest=document.getElementById('suggest');while(suggest.firstChild){suggest.removeChild(suggest.lastChild);}
 let count=0;for(let i=0;i<sortedPredict.length;i++){const kanji=kanji4List[sortedPredict[i][0]];if(isCovered(level,kanji)){const a=getLink(kanji);suggest.appendChild(a);count+=1;}
 if(count>=20){break;}}}
-const worker=new Worker('worker.js');worker.addEventListener('message',function(e){if(e.data.event=='result'){updateSuggest(e.data.result);}});initSignaturePad();
+const worker=new Worker('worker.js');worker.addEventListener('message',function(e){updateSuggest(e.data.result);});initSignaturePad();
