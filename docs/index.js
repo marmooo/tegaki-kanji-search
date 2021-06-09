@@ -7,13 +7,10 @@ function loadConfig(){if(localStorage.getItem('darkMode')==1){document.documentE
 loadConfig();function toggleDarkMode(){if(localStorage.getItem('darkMode')==1){localStorage.setItem('darkMode',0);delete document.documentElement.dataset.theme;}else{localStorage.setItem('darkMode',1);document.documentElement.dataset.theme='dark';}}
 let canvasCache=document.createElement('canvas').getContext('2d');function getImageData(drawElement){const inputWidth=inputHeight=28;canvasCache.drawImage(drawElement,0,0,inputWidth,inputHeight);let imageData=canvasCache.getImageData(0,0,inputWidth,inputHeight);let data=imageData.data;for(let i=0;i<data.length;i+=4){data[i]=255-data[i];data[i+1]=255-data[i+1];data[i+2]=255-data[i+2];}
 return imageData;}
-function getAccuracyScores(imageData){const score=tf.tidy(()=>{const channels=1;let input=tf.browser.fromPixels(imageData,channels);input=tf.cast(input,'float32').div(tf.scalar(255));input=input.expandDims();return model.predict(input).dataSync();});return score;}
 function demo(pad){fetch('/tegaki-kanji-search/demo.json').then(response=>response.json()).then(data=>{pad.fromData(data);});}
 function initSignaturePad(){const canvas=document.getElementById('canvas');const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:'black',backgroundColor:'white',throttle:0,});demo(pad);pad.onEnd=function(){predict(this._canvas);}
 document.getElementById('eraser').onclick=function(){pad.clear();};}
-function predict(canvas){const imageData=getImageData(canvas);const accuracyScores=getAccuracyScores(imageData);const sortedPredict=getSortedPredict(accuracyScores);updateSuggest(sortedPredict)}
-function removeNonKanji(sortedPredict){return sortedPredict.filter(x=>x[0]>230);}
-function getSortedPredict(accuracyScores){let index=new Array(kanji4List.length);kanji4List.forEach((kanji,i)=>{index[i]=[i,accuracyScores[i]];});index.sort((a,b)=>{if(a[1]<b[1])return 1;if(a[1]>b[1])return-1;return 0;});index=removeNonKanji(index);return index;}
+function predict(canvas){const imageData=getImageData(canvas);worker.postMessage({event:'predict',imageData:imageData});}
 function getLink(kanji){const gradeDir=getGradeDir(kanji);let a;if(gradeDir){a=document.createElement('a');a.href=`/kanji-dict/${gradeDir}/${kanji}/`;a.innerText=kanji;a.className='h4 p-1';}else{a=document.createElement('span');a.innerText=kanji;a.className='h4 p-1';}
 return a;}
 function isCovered(level,kanji){if(level==2){return true;}else{switch(true){case level>=0:if(eduList.includes(kanji)){return true;}
@@ -22,4 +19,4 @@ return false;}}
 function updateSuggest(sortedPredict){const level=document.getElementById('level').selectedIndex;const suggest=document.getElementById('suggest');while(suggest.firstChild){suggest.removeChild(suggest.lastChild);}
 let count=0;for(let i=0;i<sortedPredict.length;i++){const kanji=kanji4List[sortedPredict[i][0]];if(isCovered(level,kanji)){const a=getLink(kanji);suggest.appendChild(a);count+=1;}
 if(count>=20){break;}}}
-let model;(async()=>{initSignaturePad();model=await tf.loadLayersModel('model/model.json');predict(document.getElementById('canvas'));})();
+const worker=new Worker('worker.js');worker.addEventListener('message',function(e){if(e.data.event=='result'){updateSuggest(e.data.result);}});initSignaturePad();
