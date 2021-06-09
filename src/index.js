@@ -105,41 +105,7 @@ function initSignaturePad() {
   };
 }
 
-// // worker.js
-// function removeNonKanji(sortedPredict) {
-//   return sortedPredict.filter(x => x[0] > 230);
-// }
-//
-// function getSortedPredict(accuracyScores) {
-//   let index = new Array(kanji4List.length);
-//   kanji4List.forEach((kanji, i) => {
-//     index[i] = [i, accuracyScores[i]];
-//   });
-//   index.sort((a,b) => {
-//     if (a[1] < b[1]) return 1;
-//     if (a[1] > b[1]) return -1;
-//     return 0;
-//   });
-//   index = removeNonKanji(index);
-//   return index;
-// }
-//
-// function getAccuracyScores(imageData) {
-//   const score = tf.tidy(() => {
-//     const channels = 1;
-//     let input = tf.browser.fromPixels(imageData, channels);
-//     input = tf.cast(input, 'float32').div(tf.scalar(255));
-//     // input = input.flatten();  // mlp
-//     input = input.expandDims();
-//     return model.predict(input).dataSync();
-//   });
-//   return score;
-// }
-
 function predict(canvas) {
-  // const imageData = getImageData(canvas);
-  // const accuracyScores = getAccuracyScores(imageData);
-  // const sortedPredict = getSortedPredict(accuracyScores);
   const imageData = getImageData(canvas);
   worker.postMessage({ event:'predict', imageData:imageData });
 }
@@ -199,13 +165,6 @@ function updateSuggest(sortedPredict) {
 }
 
 
-// // worker.js
-// let model;
-// (async() => {
-//   initSignaturePad();
-//   model = await tf.loadLayersModel('model/model.json');
-//   predict(document.getElementById('canvas'));
-// })();
 const worker = new Worker('worker.js');
 worker.addEventListener('message', function(e) {
   if (e.data.event == 'result') {
