@@ -36,7 +36,7 @@ function predict(imageData) {
 }
 
 
-importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs");
+importScripts('https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js');
 
 let model;
 (async() => {
