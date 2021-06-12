@@ -44,9 +44,7 @@ let model;
 })();
 
 self.addEventListener('message', function(e) {
-  e.data.event = 'result';
-  e.data.result = predict(e.data.imageData);
-  delete e.data.imageData;
-  postMessage(e.data);
+  const result = predict(e.data);
+  postMessage(result);
 });
 

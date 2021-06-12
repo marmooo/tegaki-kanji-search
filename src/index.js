@@ -107,7 +107,7 @@ function initSignaturePad() {
 
 function predict(canvas) {
   const imageData = getImageData(canvas);
-  worker.postMessage({ event:'predict', imageData:imageData });
+  worker.postMessage(imageData);
 }
 
 function getLink(kanji) {
@@ -167,7 +167,7 @@ function updateSuggest(sortedPredict) {
 
 const worker = new Worker('worker.js');
 worker.addEventListener('message', function(e) {
-  updateSuggest(e.data.result);
+  updateSuggest(e.data);
 });
 initSignaturePad();
 
