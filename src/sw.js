@@ -8,7 +8,7 @@ var urlsToCache = [
   '/tegaki-kanji-search/model/model.json',
   '/tegaki-kanji-search/model/group1-shard1of1.bin',
   '/tegaki-kanji-search/signature_pad.umd.min.js',
-  'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css',
+  'https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css',
   'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js',
 ];
 
