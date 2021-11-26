@@ -8,7 +8,7 @@ loadConfig();function toggleDarkMode(){if(localStorage.getItem("darkMode")==1){l
 const canvasCache=document.createElement("canvas").getContext("2d");function getImageData(drawElement){const inputWidth=inputHeight=28;canvasCache.drawImage(drawElement,0,0,inputWidth,inputHeight);const imageData=canvasCache.getImageData(0,0,inputWidth,inputHeight);const data=imageData.data;for(let i=0;i<data.length;i+=4){data[i]=255-data[i];data[i+1]=255-data[i+1];data[i+2]=255-data[i+2];}
 return imageData;}
 function demo(pad){fetch("/tegaki-kanji-search/demo.json").then((response)=>response.json()).then((data)=>{pad.fromData(data);});}
-function initSignaturePad(){const canvas=document.getElementById("canvas");const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:"black",backgroundColor:"white",throttle:0,});demo(pad);pad.onEnd=function(){predict(this._canvas);};document.getElementById("eraser").onclick=function(){pad.clear();};}
+function initSignaturePad(){const canvas=document.getElementById("canvas");const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:"black",backgroundColor:"white",throttle:0,});demo(pad);pad.addEventListener("endStroke",()=>{predict(this.canvas);});document.getElementById("eraser").onclick=()=>{pad.clear();};}
 function predict(canvas){const imageData=getImageData(canvas);worker.postMessage(imageData);}
 function getLink(kanji){const gradeDir=getGradeDir(kanji);let a;if(gradeDir){a=document.createElement("a");a.href=`/kanji-dict/${gradeDir}/${kanji}/`;a.textContent=kanji;a.className="h4 p-1";}else{a=document.createElement("span");a.textContent=kanji;a.className="h4 p-1";}
 return a;}

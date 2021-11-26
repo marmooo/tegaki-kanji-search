@@ -116,10 +116,10 @@ function initSignaturePad() {
     throttle: 0,
   });
   demo(pad);
-  pad.onEnd = function () {
-    predict(this._canvas);
-  };
-  document.getElementById("eraser").onclick = function () {
+  pad.addEventListener("endStroke", () => {
+    predict(this.canvas);
+  });
+  document.getElementById("eraser").onclick = () => {
     pad.clear();
   };
 }
