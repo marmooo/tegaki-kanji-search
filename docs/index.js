@@ -10,7 +10,7 @@ return imageData;}
 function demo(pad){fetch("/tegaki-kanji-search/demo.json").then((response)=>response.json()).then((data)=>{pad.fromData(data);});}
 function initSignaturePad(){const canvas=document.getElementById("canvas");const pad=new SignaturePad(canvas,{minWidth:5,maxWidth:5,penColor:"black",backgroundColor:"white",throttle:0,});demo(pad);pad.onEnd=function(){predict(this._canvas);};document.getElementById("eraser").onclick=function(){pad.clear();};}
 function predict(canvas){const imageData=getImageData(canvas);worker.postMessage(imageData);}
-function getLink(kanji){const gradeDir=getGradeDir(kanji);let a;if(gradeDir){a=document.createElement("a");a.href=`/kanji-dict/${gradeDir}/${kanji}/`;a.innerText=kanji;a.className="h4 p-1";}else{a=document.createElement("span");a.innerText=kanji;a.className="h4 p-1";}
+function getLink(kanji){const gradeDir=getGradeDir(kanji);let a;if(gradeDir){a=document.createElement("a");a.href=`/kanji-dict/${gradeDir}/${kanji}/`;a.textContent=kanji;a.className="h4 p-1";}else{a=document.createElement("span");a.textContent=kanji;a.className="h4 p-1";}
 return a;}
 function isCovered(level,kanji){if(level==2){return true;}else{if(level>=0){if(eduList.includes(kanji)){return true;}}else if(level>=1){if(commonList.includes(kanji)){return true;}}
 return false;}}
