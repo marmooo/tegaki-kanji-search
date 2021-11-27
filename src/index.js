@@ -117,7 +117,7 @@ function initSignaturePad() {
   });
   demo(pad);
   pad.addEventListener("endStroke", () => {
-    predict(this.canvas);
+    predict(pad.canvas);
   });
   document.getElementById("eraser").onclick = () => {
     pad.clear();
