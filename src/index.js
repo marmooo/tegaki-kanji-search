@@ -116,9 +116,9 @@ function initSignaturePad() {
     throttle: 0,
   });
   demo(pad);
-  pad.addEventListener("endStroke", () => {
+  pad.onEnd = () => {
     predict(pad.canvas);
-  });
+  };
   document.getElementById("eraser").onclick = () => {
     pad.clear();
   };
