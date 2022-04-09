@@ -1,4 +1,4 @@
-var CACHE_NAME = '2022-04-05 00:14';
+var CACHE_NAME = '2022-04-09 11:16';
 var urlsToCache = [
   "/tegaki-kanji-search/",
   "/tegaki-kanji-search/worker.js",
@@ -10,7 +10,7 @@ var urlsToCache = [
   "/tegaki-kanji-search/eraser.svg",
   "https://cdn.jsdelivr.net/npm/signature_pad@4.0.4/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css",
-  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js",
+  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.15.0/dist/tf.min.js",
 ];
 
 self.addEventListener("install", function (event) {
