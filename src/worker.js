@@ -37,7 +37,7 @@ function predict(imageData) {
   return getSortedPredict(accuracyScores);
 }
 
-importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.1.0/dist/tf.min.js");
+importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.2.0/dist/tf.min.js");
 
 let model;
 (async () => {
