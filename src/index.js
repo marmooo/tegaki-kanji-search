@@ -135,13 +135,12 @@ function getLink(kanji) {
   if (gradeDir) {
     a = document.createElement("a");
     a.href = `/kanji-dict/${gradeDir}/${kanji}/`;
-    a.textContent = kanji;
-    a.className = "h4 p-1";
+    a.role = "button";
   } else {
     a = document.createElement("span");
-    a.textContent = kanji;
-    a.className = "h4 p-1";
   }
+  a.textContent = kanji;
+  a.className = "h4 p-1";
   return a;
 }
 
