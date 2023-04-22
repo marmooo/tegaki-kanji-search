@@ -38,6 +38,9 @@ const kodomoKanjis = [s1, s2, s3, s4, s5, s6, j2, j3, a1];
 const eduList = getEduList();
 const commonList = getCommonList();
 const dirNames = ["小1", "小2", "小3", "小4", "小5", "小6", "中2", "中3", "常用", "常用外"];
+const canvasCache = document.createElement("canvas")
+  .getContext("2d", { willReadFrequently: true });
+loadConfig();
 
 function getCommonList() {
   let list = [];
@@ -70,7 +73,6 @@ function loadConfig() {
     document.documentElement.dataset.theme = "dark";
   }
 }
-loadConfig();
 
 function toggleDarkMode() {
   if (localStorage.getItem("darkMode") == 1) {
@@ -82,7 +84,6 @@ function toggleDarkMode() {
   }
 }
 
-const canvasCache = document.createElement("canvas").getContext("2d");
 function getImageData(drawElement) {
   const inputWidth = inputHeight = 28;
   // resize
