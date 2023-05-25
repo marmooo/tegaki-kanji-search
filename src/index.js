@@ -189,11 +189,3 @@ worker.addEventListener("message", function (e) {
 initSignaturePad();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
-
-// disable troublesome iOS features
-if (/Macintosh/.test(navigator.userAgent)) {
-  // double tap zoom
-  document.ondblclick = (e) => {
-    e.preventDefault();
-  };
-}
