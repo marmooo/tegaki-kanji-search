@@ -1,4 +1,4 @@
-var CACHE_NAME = "2023-05-25 10:50";
+var CACHE_NAME = "2023-06-18 08:25";
 var urlsToCache = [
   "/tegaki-kanji-search/",
   "/tegaki-kanji-search/index.js",
@@ -8,7 +8,6 @@ var urlsToCache = [
   "/tegaki-kanji-search/model/group1-shard1of1.bin",
   "/tegaki-kanji-search/eraser.svg",
   "/tegaki-kanji-search/favicon/favicon.svg",
-  "https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css",
   "https://cdn.jsdelivr.net/npm/signature_pad@4.1.5/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.6.0/dist/tf.min.js",
 ];
