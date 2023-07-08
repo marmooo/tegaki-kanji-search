@@ -81,17 +81,17 @@ function getGradeDir(kanji) {
 
 function loadConfig() {
   if (localStorage.getItem("darkMode") == 1) {
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
 function toggleDarkMode() {
   if (localStorage.getItem("darkMode") == 1) {
     localStorage.setItem("darkMode", 0);
-    delete document.documentElement.dataset.theme;
+    document.documentElement.setAttribute("data-bs-theme", "light");
   } else {
     localStorage.setItem("darkMode", 1);
-    document.documentElement.dataset.theme = "dark";
+    document.documentElement.setAttribute("data-bs-theme", "dark");
   }
 }
 
@@ -147,12 +147,11 @@ function getLink(kanji) {
   if (gradeDir) {
     a = document.createElement("a");
     a.href = `/kanji-dict/${gradeDir}/${kanji}/`;
-    a.role = "button";
   } else {
     a = document.createElement("span");
   }
   a.textContent = kanji;
-  a.className = "h4 p-1";
+  a.className = "fs-4 p-1";
   return a;
 }
 
