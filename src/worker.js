@@ -37,12 +37,16 @@ function predict(imageData) {
   return getSortedPredict(accuracyScores);
 }
 
-importScripts("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js");
+async function loadModel() {
+  model = await tf.loadGraphModel("model/model.json");
+}
+
+importScripts(
+  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js",
+);
 
 let model;
-(async () => {
-  model = await tf.loadGraphModel("model/model.json");
-})();
+loadModel();
 
 self.addEventListener("message", (e) => {
   const result = predict(e.data);
