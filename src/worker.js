@@ -42,7 +42,7 @@ async function loadModel() {
 }
 
 importScripts(
-  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0/dist/tf.min.js",
+  "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js",
 );
 
 let model;
