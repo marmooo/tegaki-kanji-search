@@ -7,7 +7,7 @@ const urlsToCache = [
   "/tegaki-kanji-search/model/model.json",
   "/tegaki-kanji-search/model/group1-shard1of1.bin",
   "/tegaki-kanji-search/favicon/favicon.svg",
-  "https://cdn.jsdelivr.net/npm/signature_pad@4.1.6/dist/signature_pad.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js",
   "https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.12.0/dist/tf.min.js",
 ];
 
