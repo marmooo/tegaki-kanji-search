@@ -75,9 +75,12 @@ function initSignaturePad() {
   pad.addEventListener("endStroke", () => {
     predict(pad.canvas);
   });
-  document.getElementById("eraser").onclick = () => {
-    pad.clear();
-  };
+  const eraser = document.getElementById("eraser");
+  if (globalThis.ontouchstart) {
+    eraser.ontouchstart = () => pad.clear();
+  } else {
+    eraser.onclick = () => pad.clear();
+  }
 }
 
 function predict(canvas) {
@@ -144,3 +147,21 @@ worker.addEventListener("message", (e) => {
 initSignaturePad();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+
+if (CSS.supports("-webkit-touch-callout: default")) { // iOS
+  // prevent double click zoom
+  document.addEventListener("dblclick", (event) => event.preventDefault());
+  // prevent text selection
+  const preventDefault = (event) => event.preventDefault();
+  const canvas = document.getElementById("canvas");
+  canvas.addEventListener("touchstart", () => {
+    document.addEventListener("touchstart", preventDefault, {
+      passive: false,
+    });
+  });
+  canvas.addEventListener("touchend", () => {
+    document.removeEventListener("touchstart", preventDefault, {
+      passive: false,
+    });
+  });
+}
