@@ -141,12 +141,15 @@ function updateSuggest(sortedPredict) {
 const Joyo = JKAT.slice(0, 10);
 const jkat = new Kanji(Joyo);
 const worker = new Worker("worker.js");
-worker.addEventListener("message", (e) => {
-  updateSuggest(e.data);
+worker.addEventListener("message", (event) => {
+  updateSuggest(event.data);
 });
-initSignaturePad();
+const pad = initSignaturePad();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
+document.addEventListener("touchstart", () => {
+  predict(pad.canvas);
+}, { once: true });
 
 if (CSS.supports("-webkit-touch-callout: default")) { // iOS
   // prevent double click zoom
