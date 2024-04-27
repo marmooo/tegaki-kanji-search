@@ -147,7 +147,7 @@ worker.addEventListener("message", (event) => {
 const pad = initSignaturePad();
 
 document.getElementById("toggleDarkMode").onclick = toggleDarkMode;
-document.addEventListener("touchstart", () => {
+document.addEventListener("pointerdown", () => {
   predict(pad.canvas);
 }, { once: true });
 
