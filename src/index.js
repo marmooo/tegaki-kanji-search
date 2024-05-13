@@ -81,6 +81,7 @@ function initSignaturePad() {
   } else {
     eraser.onclick = () => pad.clear();
   }
+  return pad;
 }
 
 function predict(canvas) {
